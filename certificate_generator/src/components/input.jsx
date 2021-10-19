@@ -1,15 +1,27 @@
 import React from "react";
 
-const Input = ({ data }) => {
+const Input = ({
+  styles,
+  htmlFor,
+  type,
+  placeholder,
+  value,
+  handleKeyDown,
+  handleChange,
+}) => {
   return (
     <div>
-      <label htmlFor={data.for}></label>
+      <label htmlFor={htmlFor}></label>
       <input
-        type={data.type}
-        id={data.for}
-        name={data.for}
-        placeholder={data.placeholder}
-        className={data.styles}
+        type={type}
+        id={htmlFor}
+        name={htmlFor}
+        placeholder={placeholder}
+        className={styles}
+        value={value}
+        required
+        onChange={(e) => handleChange(e)}
+        onKeyDown={(e) => handleKeyDown(e)}
       />
     </div>
   );
