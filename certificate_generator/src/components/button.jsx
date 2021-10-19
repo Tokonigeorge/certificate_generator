@@ -1,9 +1,9 @@
 import React from "react";
 
-const Button = ({ actionType }) => {
+const Button = ({ btnData }) => {
   return (
-    <div>
-      <button>{actionType}</button>
+    <div className="grid items-center">
+      <button className={btnData.styles}>{btnData.actionType}</button>
     </div>
   );
 };
