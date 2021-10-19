@@ -1,10 +1,11 @@
-import { useState } from "react";
+import React from "react";
 import "./App.css";
+import VerifyEmail from "./pages/verifyEmail";
 
 function App() {
   return (
     <div className="App">
-      <p className="text-red-400">Test text</p>
+      <VerifyEmail />
     </div>
   );
 }
