@@ -18,7 +18,7 @@ function App() {
           />
         </Route>
         <Route path="/checkemail">
-          <Checkmail verify={verify} />
+          <Checkmail verify={verify} email={value} />
         </Route>
       </div>
     </Switch>
