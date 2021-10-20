@@ -1,6 +1,6 @@
 import React from "react";
 
-const Checkmail = ({ message }) => {
+const Checkmail = ({ verify }) => {
   const Notfound = ({ message }) => {
     return (
       <div>

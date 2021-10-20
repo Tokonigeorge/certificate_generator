@@ -3,17 +3,16 @@ import Input from "../components/input";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { emails } from "../../data";
 import Button from "../components/button";
+import Checkmail from "./Checkmail";
 
-const VerifyEmail = () => {
-  const [value, setValue] = useState("");
-  const [verify, setVerify] = useState({ isFound: false });
+const VerifyEmail = ({ value, setValue, setVerify }) => {
   const verifyEmail = (e) => {
     if (
       value.match(
         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
       )
     ) {
-      if (value.length > 0) return emails.includes(value);
+      if (value.length > 0) setVerify(emails.includes(value));
     } else {
       e.preventDefault();
       alert("Invalid email address");
