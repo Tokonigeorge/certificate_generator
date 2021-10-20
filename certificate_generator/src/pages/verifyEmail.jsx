@@ -1,13 +1,23 @@
 import React, { useState } from "react";
 import Input from "../components/input";
-import Button from "../components/button";
-import { BrowserRouter as Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { emails } from "../../data";
+import Button from "../components/button";
 
 const VerifyEmail = () => {
   const [value, setValue] = useState("");
-  const verifyEmail = () => {
-    if (value.length > 0) return emails.includes(value);
+  const [verify, setVerify] = useState({ isFound: false });
+  const verifyEmail = (e) => {
+    if (
+      value.match(
+        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+      )
+    ) {
+      if (value.length > 0) return emails.includes(value);
+    } else {
+      e.preventDefault();
+      alert("Invalid email address");
+    }
   };
   const data = {
     styles:
@@ -18,7 +28,7 @@ const VerifyEmail = () => {
     value: value,
     handleKeyDown: (e) => {
       if (e.key === "Enter") {
-        verifyEmail();
+        e.preventDefault();
       }
     },
     handleChange: (e) => {
@@ -30,8 +40,8 @@ const VerifyEmail = () => {
     actionType: "Verify",
     styles:
       "bg-blue-400 px-4 py-2 text-white rounded-sm font-semibold hover:bg-opacity-90 w-full md:w-1/2",
-    handleClick: () => {
-      verifyEmail();
+    handleClick: (e) => {
+      verifyEmail(e);
     },
   };
 
