@@ -3,7 +3,6 @@ import Input from "../components/input";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { emails } from "../../data";
 import Button from "../components/button";
-import Checkmail from "./Checkmail";
 
 const VerifyEmail = ({ value, setValue, setVerify }) => {
   const verifyEmail = (e) => {

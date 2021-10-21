@@ -1,33 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Input from "../components/input";
 import Button from "../components/button";
 
-const Checkmail = ({ verify, email }) => {
+const Checkmail = ({ email, verify }) => {
   const message = "Oops. Email not registered, go back?";
   const [value, setValue] = useState("");
-  const [hasDownload, setHasDownload] = useState(false);
+  const [name, setName] = useState(null);
+  const [isDownload, setIsDownload] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
 
-  // useEffect(() => {
-  //   //get item from local storage and set has download
-  //   setHasDownload(localStorage.getItem("name"));
-  //   console.log(localStorage.getItem("name"));
-  // }, [hasDownload]);
-
+  //connect to an email api to send emails to user
+  //make download button work
+  //try reasoning how to place input over image
+  //host data on firebase
+  // setValue(localStorage.getItem(`${email}`));
   const getDownload = () => {
-    if (localStorage.getItem(`${email}`)) {
+    if (localStorage.getItem(email)) {
       return true;
     }
   };
-
-  // const btnData = {
-  //   actionType: "Download",
-  //   styles:
-  //     "bg-blue-400 px-4 py-2 text-white rounded-sm font-semibold hover:bg-opacity-90 w-full md:w-1/2",
-  //   handleClick: (e) => {
-  //     console.log(e);
-  //   },
-  // };
 
   const btnData = {
     actionType: "Download",
@@ -35,7 +26,10 @@ const Checkmail = ({ verify, email }) => {
       "bg-blue-400 px-4 py-2 text-white rounded-sm font-semibold hover:bg-opacity-90 w-full md:w-1/2",
     handleClick: (e) => {
       e.preventDefault();
-      localStorage.setItem(`${email}`, value);
+      if (!localStorage.getItem(email)) {
+        localStorage.setItem(email, value);
+      }
+      setIsDownload(!isDownload);
     },
   };
 
@@ -103,6 +97,9 @@ const Checkmail = ({ verify, email }) => {
   };
 
   const HasDownload = () => {
+    if (localStorage.getItem(email)) {
+      setName(localStorage.getItem(email));
+    }
     return (
       <>
         <h2 className="text-4xl md:text-5xl font-semibold mb-4 px-4 text-center">
@@ -130,20 +127,35 @@ const Checkmail = ({ verify, email }) => {
   };
 
   return (
-    <div className="container max-auto h-auto grid place-items-center items-center mt-48">
-      {verify ? (
-        getDownload() ? (
-          <HasDownload />
-        ) : isClicked ? (
-          <DownloadCert />
-        ) : (
-          //called as a function to prevent rerendering of input and loosing focus
-          inputName()
-        )
+    <>
+      {isDownload ? (
+        <div className="container relative">
+          <img
+            src="../../assets/certificate.jpg"
+            alt="certificate"
+            className=""
+          />
+          <div className="text-center absolute top-1/2 left-1/3">
+            {name || value}
+          </div>
+        </div>
       ) : (
-        <Notfound message={message} />
+        <div className="container max-auto h-auto grid place-items-center items-center mt-48">
+          {verify ? (
+            getDownload() ? (
+              <HasDownload />
+            ) : isClicked ? (
+              <DownloadCert />
+            ) : (
+              //called as a function to prevent rerendering of input and loosing focus
+              inputName()
+            )
+          ) : (
+            <Notfound message={message} />
+          )}
+        </div>
       )}
-    </div>
+    </>
   );
 };
 

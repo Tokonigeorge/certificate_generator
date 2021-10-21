@@ -9,18 +9,20 @@ function App() {
   const [verify, setVerify] = useState(false);
   return (
     <Switch>
-      <div className="App">
-        <Route exact path="/">
-          <VerifyEmail
-            value={value}
-            setValue={setValue}
-            setVerify={setVerify}
-          />
-        </Route>
-        <Route path="/checkemail">
-          <Checkmail verify={verify} email={value} />
-        </Route>
-      </div>
+      <>
+        <div className="App">
+          <Route exact path="/">
+            <VerifyEmail
+              value={value}
+              setValue={setValue}
+              setVerify={setVerify}
+            />
+          </Route>
+          <Route path="/checkemail">
+            <Checkmail email={value} verify={verify} />
+          </Route>
+        </div>
+      </>
     </Switch>
   );
 }
