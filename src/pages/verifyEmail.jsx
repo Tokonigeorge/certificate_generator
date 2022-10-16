@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Input from "../components/input";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { emails } from "../../data";
+import { BrowserRouter as Router, Link } from "react-router-dom";
+import { emails } from "../data";
 import Button from "../components/button";
 
 const VerifyEmail = ({ value, setValue, setVerify }) => {

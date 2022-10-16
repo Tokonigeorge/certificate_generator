@@ -9,11 +9,7 @@ const Checkmail = ({ email, verify }) => {
   const [isDownload, setIsDownload] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
 
-  //connect to an email api to send emails to user
-  //make download button work
-  //try reasoning how to place input over image
-  //host data on firebase
-  // setValue(localStorage.getItem(`${email}`));
+ 
   const getDownload = () => {
     if (localStorage.getItem(email)) {
       return true;
@@ -131,7 +127,7 @@ const Checkmail = ({ email, verify }) => {
       {isDownload ? (
         <div className="container relative">
           <img
-            src="../../assets/certificate.jpg"
+            src="../src/assets/certificate.jpg"
             alt="certificate"
             className=""
           />
