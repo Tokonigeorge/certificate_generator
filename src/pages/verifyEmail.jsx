@@ -1,17 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Input from "../components/input";
 import { BrowserRouter as Router, Link } from "react-router-dom";
-import { emails } from "../data";
+// import { emails } from "../data";
 import Button from "../components/button";
 
-const VerifyEmail = ({ value, setValue, setVerify }) => {
+const VerifyEmail = ({ value, setValue, setVerify, emails }) => {
+ 
+
+ 
+
   const verifyEmail = (e) => {
     if (
       value.match(
         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
       )
     ) {
-      if (value.length > 0) setVerify(emails.includes(value));
+      if (value.length > 0) {
+        setVerify( emails?.filter(i=>i.email.stringValue === value).length > 0);
+      }
     } else {
       e.preventDefault();
       alert("Invalid email address");
@@ -39,6 +45,10 @@ const VerifyEmail = ({ value, setValue, setVerify }) => {
     styles:
       "bg-blue-400 px-4 py-2 text-white rounded-sm font-semibold hover:bg-opacity-90 w-full md:w-1/2",
     handleClick: (e) => {
+      if (emails.length < 1) {
+        e.preventDefault()
+        alert('Something went wrong, please reload and try again.')
+      }
       verifyEmail(e);
     },
   };

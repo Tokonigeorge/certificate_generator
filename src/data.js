@@ -1,1 +1,0 @@
-export const emails = ['bukolaebikefe@gmail.com', 'ebikefebukola@gmail.com']
