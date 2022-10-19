@@ -3,6 +3,7 @@ import {db} from '../firebase'
 import React, { useState, useEffect } from "react";
 import Input from "../components/input";
 import Button from "../components/button";
+import certificate from '../assets/certificate.jpg';
 import { doc, updateDoc, deleteDoc, collection} from "firebase/firestore";
 import { Page, Text, View, Document, StyleSheet, pdf, Image} from '@react-pdf/renderer';
 
@@ -50,7 +51,7 @@ const Checkmail = ({ emails, verify, email}) => {
   <Document>
     <Page size="A4" style={styles.page} orientation="landscape" wrap={false}>
       <View>
-          <Image src="../src/assets/certificate.jpg" style={styles.image} />
+          <Image src={certificate} style={styles.image} />
           <Text style={styles.text} fixed={true}>{name}</Text>
         </View>
     </Page>
