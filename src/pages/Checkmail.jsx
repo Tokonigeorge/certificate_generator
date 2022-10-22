@@ -1,5 +1,6 @@
 import { saveAs } from 'file-saver'
-import {db} from '../firebase'
+import { db } from '../firebase'
+import { axios } from 'axios';
 import React, { useState, useEffect } from "react";
 import Input from "../components/input";
 import Button from "../components/button";
@@ -33,8 +34,8 @@ const Checkmail = ({ emails, verify, email}) => {
     text: {
       fontFamily: 'Courier',
       fontStyle: 'normal',
-      fontSize: `${ check ? '24px':'16px'}`,
-      marginTop: `${check ? '-31.8%': '-30.5%'}`,
+      fontSize: `${ check ? '32px':'16px'}`,
+      marginTop: `${check ? '-32.5%': '-30.5%'}`,
       marginLeft: '28.5%',
       width: `500px`,
       textAlign: 'center',
@@ -92,6 +93,29 @@ const Checkmail = ({ emails, verify, email}) => {
        }
       
         )
+//         axios({
+//     method: 'post',
+//     url: `${mailgun.baseUrl}/${mailgun.domain}/messages`,
+//     auth: {
+//         username: 'api',
+//         password: mailgun.apiKey
+//     },
+//     params: {
+//         from: 'Cowlsonwc@gmail.com',
+//         to: email,
+//         subject: 'Hello',
+//       text: 'Cowlso Certificate',
+//         attachments: []
+//     }
+// }).then(
+//     response => {
+//         console.log(response)
+//     },
+//     reject => {
+//         console.log(reject)
+//     }
+// )
+
        setIsDownload(true)
     } catch (err) {
       alert("Please retry")
@@ -107,9 +131,13 @@ const Checkmail = ({ emails, verify, email}) => {
       "bg-blue-400 px-4 py-2 text-white rounded-sm font-semibold hover:bg-opacity-90 w-full md:w-1/2",
     handleClick: (e) => {
       if (value) {
-        alert("Are you sure the detail is correct?");
-       setName(value)
+        if (confirm("Kindly confirm that you have inputted the correct info. Please note that you cannot modify after confirming your input.")) {
+         setName(value)
         setIsClicked(!isClicked);
+       }
+        else {
+          e.preventDefault()
+       }
       }
       else {
         e.preventDefault()
