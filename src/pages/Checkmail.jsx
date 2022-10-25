@@ -1,6 +1,6 @@
 import { saveAs } from 'file-saver'
 import { db } from '../firebase'
-import { axios } from 'axios';
+import axios from 'axios';
 import React, { useState, useEffect } from "react";
 import Input from "../components/input";
 import Button from "../components/button";
@@ -19,7 +19,7 @@ const Checkmail = ({ emails, verify, email}) => {
 
 
 
-  const check = 500/name?.length  > 24
+  const check = 500/name?.length  > 20
   const styles = StyleSheet.create({
   page: {
 
@@ -34,6 +34,7 @@ const Checkmail = ({ emails, verify, email}) => {
     text: {
       fontFamily: 'Courier',
       fontStyle: 'normal',
+      fontWeight: 700,
       fontSize: `${ check ? '32px':'16px'}`,
       marginTop: `${check ? '-32.5%': '-30.5%'}`,
       marginLeft: '28.5%',
@@ -93,19 +94,20 @@ const Checkmail = ({ emails, verify, email}) => {
        }
       
         )
+
 //         axios({
 //     method: 'post',
-//     url: `${mailgun.baseUrl}/${mailgun.domain}/messages`,
+//     url: `https://api.mailgun.net/v3/sandbox6ff9e02209e74761abb56785acee3a47.mailgun.org/localhost:3000/messages`,
 //     auth: {
-//         username: 'api',
-//         password: mailgun.apiKey
+//         username: 'COWLSO',
+//         password:"387613d8d2af61b87ef73646b998ef9e-07a637b8-2ffe4975"
 //     },
 //     params: {
 //         from: 'Cowlsonwc@gmail.com',
 //         to: email,
 //         subject: 'Hello',
 //       text: 'Cowlso Certificate',
-//         attachments: []
+//         attachments: [],
 //     }
 // }).then(
 //     response => {

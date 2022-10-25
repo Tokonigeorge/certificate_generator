@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
+// import {data} from './csvjsons'
 import VerifyEmail from "./pages/verifyEmail";
 import Checkmail from "./pages/Checkmail";
 import { db } from './firebase'
@@ -22,6 +23,27 @@ function App() {
   })   
 
    }, [])
+
+//   useEffect(() => {
+//     const update = async () => {
+//     const updatedEmails = data.map(i => {
+//             return {
+//               email: i.email, download: false, name: ''
+//             }
+        
+//       }
+//       )
+//       console.log(updatedEmails)
+//     const taskDocRef = doc(db, 'emails/emailAddress')
+//       await updateDoc(taskDocRef, 
+//        {
+//          address: updatedEmails
+//        }
+      
+//         )
+//     }
+//  update()
+//   })
 
   return (
     <Routes>
