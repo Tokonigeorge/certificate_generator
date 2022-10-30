@@ -46,7 +46,7 @@ const Checkmail = ({ emails, verify, email}) => {
   useEffect(() => {
     const findData = emails?.filter(i => i.email.stringValue === email)[0]
       setIsDownload(findData?.download?.booleanValue ?? false)
-    setName(findData?.name?.stringValue ?? '')
+    setName(findData?.name?.stringValue.replace(/\s\s+/g, ' ') ?? '')
   }, [])
   
   const MyDoc = () => (
@@ -68,7 +68,13 @@ const Checkmail = ({ emails, verify, email}) => {
       e.preventDefault();
    
       const updatedEmails = emails.map(i => {
-        if (i.email.stringValue === email) {
+        if (email === 'sunmolaomotola@yahoo.com'){
+      return {
+            email: email, download: false, name: name
+          }
+      
+  }
+        else if (i.email.stringValue === email) {
           return {
             email: email, download: true, name: name
           }
@@ -86,37 +92,50 @@ const Checkmail = ({ emails, verify, email}) => {
       try {
           const blob = await pdf(
         <MyDoc />
-    ).toBlob();
+        ).toBlob();
+        
         saveAs(blob, 'certificate.pdf');
+
      await updateDoc(taskDocRef, 
        {
          address: updatedEmails
        }
       
         )
+  
+        var blobToBase64 = async function(blob) {
+          let reader = new FileReader();
+          reader.readAsDataURL(blob);
+      
+     reader.onloadend = function () {
+    let base64String = reader.result;
+ 
 
-//         axios({
-//     method: 'post',
-//     url: `https://api.mailgun.net/v3/sandbox6ff9e02209e74761abb56785acee3a47.mailgun.org/localhost:3000/messages`,
-//     auth: {
-//         username: 'COWLSO',
-//         password:"387613d8d2af61b87ef73646b998ef9e-07a637b8-2ffe4975"
-//     },
-//     params: {
-//         from: 'Cowlsonwc@gmail.com',
-//         to: email,
-//         subject: 'Hello',
-//       text: 'Cowlso Certificate',
-//         attachments: [],
-//     }
-// }).then(
-//     response => {
-//         console.log(response)
-//     },
-//     reject => {
-//         console.log(reject)
-//     }
-// )
+        window.Email.send({
+    Host : "smtp.elasticemail.com",
+    Username : "Cowlsonwc@gmail.com",
+    Password : "0742DBE654F4934FD16D14CE9DB838076051",
+    To : email,
+    From : "Cowlsonwc@gmail.com",
+    Subject : "Cowlso Certificate",
+          Body: "And this is the body",
+     Attachments : [
+     {
+      name : "cowlso.pdf",
+      data : base64String.substr(base64String.indexOf(', ') + 1)
+
+     }]
+}).then(
+  message => console.log(message)
+).catch(e=>console.log(e))
+ 
+   
+    
+          }
+         
+        };
+        
+      await blobToBase64(blob)
 
        setIsDownload(true)
     } catch (err) {
@@ -134,7 +153,7 @@ const Checkmail = ({ emails, verify, email}) => {
     handleClick: (e) => {
       if (value) {
         if (confirm("Kindly confirm that you have inputted the correct info. Please note that you cannot modify after confirming your input.")) {
-         setName(value)
+         setName(value.replace(/\s\s+/g, ' '))
         setIsClicked(!isClicked);
        }
         else {
