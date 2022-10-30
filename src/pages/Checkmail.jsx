@@ -118,7 +118,7 @@ const Checkmail = ({ emails, verify, email}) => {
     To : email,
     From : "Cowlsonwc@gmail.com",
     Subject : "Cowlso Certificate",
-          Body: "And this is the body",
+          // Body: "",
      Attachments : [
      {
       name : "cowlso.pdf",
