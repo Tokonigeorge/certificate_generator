@@ -1,4 +1,7 @@
 export const data = [
+   {
+    "email": "sunmolaomotola@yahoo.com"
+  },
     {
     "email": "bukolaebikefe@gmail.com"
   },

@@ -5,6 +5,7 @@ import "./App.css";
 import VerifyEmail from "./pages/verifyEmail";
 import Checkmail from "./pages/Checkmail";
 import { db } from './firebase'
+// import { doc, updateDoc, deleteDoc, collection} from "firebase/firestore";
 import {collection, query, orderBy, onSnapshot} from "firebase/firestore"
 
 function App() {

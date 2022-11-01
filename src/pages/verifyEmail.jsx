@@ -16,6 +16,7 @@ const VerifyEmail = ({ value, setValue, setVerify, emails }) => {
       )
     ) {
       if (value.length > 0) {
+  
         setVerify( emails?.filter(i=>i.email.stringValue === value).length > 0);
       }
     } else {

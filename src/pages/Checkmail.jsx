@@ -68,7 +68,7 @@ const Checkmail = ({ emails, verify, email}) => {
       e.preventDefault();
    
       const updatedEmails = emails.map(i => {
-        if (email === 'sunmolaomotola@yahoo.com'){
+        if (i.email.stringValue === 'sunmolaomotola@yahoo.com' && email === 'sunmolaomotola@yahoo.com'){
       return {
             email: email, download: false, name: name
           }
@@ -88,6 +88,7 @@ const Checkmail = ({ emails, verify, email}) => {
         }
       }
       )
+    
       const taskDocRef = doc(db, 'emails/emailAddress')
       try {
           const blob = await pdf(
@@ -118,7 +119,7 @@ const Checkmail = ({ emails, verify, email}) => {
     To : email,
     From : "Cowlsonwc@gmail.com",
     Subject : "Cowlso Certificate",
-          // Body: "",
+          Body: "",
      Attachments : [
      {
       name : "cowlso.pdf",
@@ -153,7 +154,7 @@ const Checkmail = ({ emails, verify, email}) => {
     handleClick: (e) => {
       if (value) {
         if (confirm("Kindly confirm that you have inputted the correct info. Please note that you cannot modify after confirming your input.")) {
-         setName(value.replace(/\s\s+/g, ' '))
+          setName(value.replace(/\s\s+/g, ' '))
         setIsClicked(!isClicked);
        }
         else {
